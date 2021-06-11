@@ -53,14 +53,14 @@ namespace Roommates.Repositories
                         int nameColumnPosition = reader.GetOrdinal("Name");
                         string nameValue = reader.GetString(nameColumnPosition);
 
-               
+
 
                         // Now let's create a new chore object using the data from the database.
                         Chore chore = new Chore
                         {
                             Id = idValue,
                             Name = nameValue
-                            
+
                         };
 
                         // ...and add that chore object to our list.
@@ -98,7 +98,7 @@ namespace Roommates.Repositories
                         {
                             Id = id,
                             Name = reader.GetString(reader.GetOrdinal("Name"))
-                            
+
                         };
                     }
 
@@ -126,7 +126,7 @@ namespace Roommates.Repositories
                                          OUTPUT INSERTED.Id 
                                          VALUES (@name)";
                     cmd.Parameters.AddWithValue("@name", chore.Name);
-                    
+
                     int id = (int)cmd.ExecuteScalar();
 
                     chore.Id = id;
@@ -134,6 +134,46 @@ namespace Roommates.Repositories
             }
 
             // when this method is finished we can look in the database and see the new chore.
+        }
+
+        public List<Chore> GetUnassignedChores()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText =
+                        @" SELECT c.Name, c.Id, rc.RoommateId
+                         FROM Chore c 
+                        LEFT JOIN RoommateChore rc  on rc.ChoreId = c.Id
+                        WHERE rc.RoommateId is Null";
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Chore> unassignedChores = new List<Chore>();
+
+                    while (reader.Read())
+                    {
+                        int idColumnPosition = reader.GetOrdinal("Id");
+                        int idValue = reader.GetInt32(idColumnPosition);
+
+                        int namePosition = reader.GetOrdinal("Name");
+                        string nameValue = reader.GetString(namePosition);
+
+                        Chore chore = new Chore
+                        {
+                            Id = idValue,
+                            Name = nameValue
+                        };
+
+                        unassignedChores.Add(chore);
+                    }
+                    reader.Close();
+                    return unassignedChores;
+                }
+            }
         }
 
 
