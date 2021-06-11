@@ -1,0 +1,16 @@
+C:\Users\info\workspace\csharp\Roomates\Roomates\bin\Debug\net5.0\Roomates.exe
+C:\Users\info\workspace\csharp\Roomates\Roomates\bin\Debug\net5.0\Roomates.deps.json
+C:\Users\info\workspace\csharp\Roomates\Roomates\bin\Debug\net5.0\Roomates.runtimeconfig.json
+C:\Users\info\workspace\csharp\Roomates\Roomates\bin\Debug\net5.0\Roomates.runtimeconfig.dev.json
+C:\Users\info\workspace\csharp\Roomates\Roomates\bin\Debug\net5.0\Roomates.dll
+C:\Users\info\workspace\csharp\Roomates\Roomates\bin\Debug\net5.0\ref\Roomates.dll
+C:\Users\info\workspace\csharp\Roomates\Roomates\bin\Debug\net5.0\Roomates.pdb
+C:\Users\info\workspace\csharp\Roomates\Roomates\obj\Debug\net5.0\Roomates.csproj.AssemblyReference.cache
+C:\Users\info\workspace\csharp\Roomates\Roomates\obj\Debug\net5.0\Roomates.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\info\workspace\csharp\Roomates\Roomates\obj\Debug\net5.0\Roomates.AssemblyInfoInputs.cache
+C:\Users\info\workspace\csharp\Roomates\Roomates\obj\Debug\net5.0\Roomates.AssemblyInfo.cs
+C:\Users\info\workspace\csharp\Roomates\Roomates\obj\Debug\net5.0\Roomates.csproj.CoreCompileInputs.cache
+C:\Users\info\workspace\csharp\Roomates\Roomates\obj\Debug\net5.0\Roomates.dll
+C:\Users\info\workspace\csharp\Roomates\Roomates\obj\Debug\net5.0\ref\Roomates.dll
+C:\Users\info\workspace\csharp\Roomates\Roomates\obj\Debug\net5.0\Roomates.pdb
+C:\Users\info\workspace\csharp\Roomates\Roomates\obj\Debug\net5.0\Roomates.genruntimeconfig.cache
