@@ -244,6 +244,19 @@ namespace Roommates
                         break;
 
 
+                    case ("Count chores for roommates"):
+                        List<RoommateChore> choreCounts = choreRepo.GetChoreCount();
+                        foreach(RoommateChore c in choreCounts)
+                        {
+                            Console.WriteLine($"{c.FirstName} has {c.ChoreCount} chores assigned to them");
+                        }
+                        Console.Write("Press any key to continue");
+                        Console.ReadKey();
+                        break;
+
+
+
+
                     case ("Exit"):
                         runProgram = false;
                         break;
@@ -272,6 +285,7 @@ namespace Roommates
                 "Delete a chore",
                 "Show unassigned chores",
                 "Search for roommate",
+                "Count chores for roommates",
                 "Exit"
             };
 

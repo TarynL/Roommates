@@ -201,7 +201,7 @@ namespace Roommates.Repositories
 
         }
 
-        
+
         public void DeleteAssignChores(int id)
         {
             using (SqlConnection conn = Connection)
@@ -257,5 +257,54 @@ namespace Roommates.Repositories
             }
         }
 
+        public List<RoommateChore> GetChoreCount()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT r.FirstName, count(r.FirstName) as ChoreCount
+                                       FROM RoommateChore rc 
+                                       JOIN Roommate r on rc.RoommateId = r.Id
+                                        GROUP BY r.FirstName  ";
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<RoommateChore> choreCounts = new List<RoommateChore>();
+
+                    while (reader.Read())
+                    {
+
+
+                        int firstNameColumn = reader.GetOrdinal("FirstName");
+                        string firstNameValue = reader.GetString(firstNameColumn);
+
+                        int choreCountColumn = reader.GetOrdinal("ChoreCount");
+                        int choreCountValue = reader.GetInt32(choreCountColumn);
+
+
+
+
+                        RoommateChore choreCount = new RoommateChore
+                        {
+
+                            FirstName = firstNameValue,
+                            ChoreCount = choreCountValue
+                        };
+
+                        choreCounts.Add(choreCount);
+
+
+
+
+                    }
+                    reader.Close();
+
+                    return choreCounts;
+                }
+            }
+
+        }
     }
 }
