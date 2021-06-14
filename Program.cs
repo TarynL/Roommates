@@ -90,12 +90,12 @@ namespace Roommates
                         Console.Write("Chore name: ");
                         string choreName = Console.ReadLine();
 
-                        
+
 
                         Chore choreToAdd = new Chore()
                         {
                             Name = choreName
-                            
+
                         };
 
                         choreRepo.Insert(choreToAdd);
@@ -111,7 +111,7 @@ namespace Roommates
 
                         Roommate roommate = roommateRepo.GetById(roommateId);
 
-                        Console.WriteLine($"{roommate.Id} - {roommate.FirstName} pays {roommate.RentPortion} and lives in the {roommate.Room}");
+                        Console.WriteLine($"{roommate.Id} - {roommate.FirstName} pays {roommate.RentPortion} dollars and lives in the {roommate.Room}");
                         Console.Write("Press any key to continue");
                         Console.ReadKey();
                         break;
@@ -125,6 +125,34 @@ namespace Roommates
                         Console.Write("Press any key to continue");
                         Console.ReadKey();
                         break;
+
+                    case ("Assign a chore"):
+
+                        List<Chore> choreList = choreRepo.GetAll();
+                        foreach (Chore c in choreList)
+                        {
+                            Console.WriteLine($"{c.Name} has an Id of {c.Id}");
+
+                        }
+                        Console.WriteLine("Please select Chore Id you want to assign: ");
+                        int choreRoommate = int.Parse(Console.ReadLine());
+
+                        
+                        List<Roommate> roommateList = roommateRepo.GetAll();
+                        foreach(Roommate rm in roommateList)
+                        {
+                            Console.WriteLine($"{rm.FirstName} has an Id of {rm.Id}");
+                        }
+                        Console.WriteLine($"What roommate Id would you like to assign the chore to: ");
+                        int roommateChore = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine($"You have successfully assigned the chore.");
+
+                        choreRepo.AssignChore(choreRoommate, roommateChore);
+                        Console.Write("Press any key to continue");
+                        Console.ReadKey();
+                        break;
+
 
                     case ("Exit"):
                         runProgram = false;
@@ -149,6 +177,7 @@ namespace Roommates
                 "Add a chore",
                 "Search for roommate",
                 "Show unassigned chores",
+                "Assign a chore",
                 "Exit"
             };
 
