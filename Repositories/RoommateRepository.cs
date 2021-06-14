@@ -19,7 +19,10 @@ namespace Roommates.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT rm.FirstName, rm.RentPortion, r.Name  FROM Roommate rm Join Room r on rm.RoomId = r.id";
+                    cmd.CommandText = @"SELECT  rm.Id, rm.FirstName, rm.LastName, rm.RentPortion, rm.MoveInDate,
+                                        r.Name  as RoomName, r.MaxOccupancy
+                                         FROM Roommate rm Join Room r on rm.RoomId = r.id
+                                     WHERE rm.id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -28,12 +31,22 @@ namespace Roommates.Repositories
                     // If we only expect a single row back from the database, we don't need a while loop.
                     if (reader.Read())
                     {
-                        roommate = new Roommate
+                        roommate = new Roommate()
                         {
                             Id = id,
                             FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                            RentPortion = reader.GetInt32(reader.GetOrdinal("RentPortion"))
-                            
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            RentPortion = reader.GetInt32(reader.GetOrdinal("RentPortion")),
+                            MovedInDate = reader.GetDateTime(reader.GetOrdinal("MoveInDate")),
+                            Room = new Room()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.GetString(reader.GetOrdinal("RoomName")),
+                                MaxOccupancy = reader.GetInt32(reader.GetOrdinal("MaxOccupancy")),
+                            }
+                           
+
+
                         };
                     }
 
@@ -70,7 +83,7 @@ namespace Roommates.Repositories
                         int rentColumn = reader.GetOrdinal("RentPortion");
                         int rentValue = reader.GetInt32(rentColumn);
 
-           
+
 
 
                         Roommate roommate = new Roommate
@@ -79,7 +92,7 @@ namespace Roommates.Repositories
                             FirstName = firstNameValue,
                             LastName = lastNameValue,
                             RentPortion = rentValue
-                            
+
                         };
 
                         roommates.Add(roommate);

@@ -111,7 +111,7 @@ namespace Roommates
 
                         Roommate roommate = roommateRepo.GetById(roommateId);
 
-                        Console.WriteLine($"{roommate.Id} - {roommate.FirstName} pays {roommate.RentPortion} dollars and lives in the {roommate.Room}");
+                        Console.WriteLine($"{roommate.Id} - {roommate.FirstName} pays {roommate.RentPortion}% and lives in the {roommate.Room.Name}");
                         Console.Write("Press any key to continue");
                         Console.ReadKey();
                         break;
