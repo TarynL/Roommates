@@ -224,16 +224,20 @@ namespace Roommates
                         int deleteChoreId = int.Parse(Console.ReadLine());
                         Chore deletedChore = choreDelete.FirstOrDefault(c => c.Id == deleteChoreId);
 
-                        try
-                        {
-                            choreRepo.Delete(deleteChoreId);
-                            Console.WriteLine("Chore has been successfully deleted");
 
-                        }
-                        catch
-                        {
-                            Console.WriteLine("Unable to delete. Chore is assigned to a roommate.");
-                        }
+                        choreRepo.DeleteAssignChores(deleteChoreId);
+                        choreRepo.Delete(deleteChoreId);
+
+                        //try
+                        //{
+                        //    choreRepo.Delete(deleteChoreId);
+                        //    Console.WriteLine("Chore has been successfully deleted");
+
+                        //}
+                        //catch(Microsoft.Data.SqlClient.SqlException)
+                        //{
+                        //    Console.WriteLine("Unable to delete. Chore is assigned to a roommate.");
+                        //}
 
                         Console.Write("Press any key to continue");
                         Console.ReadKey();
@@ -258,16 +262,16 @@ namespace Roommates
                 "Show all rooms",
                 "Search for room",
                 "Add a room",
+                "Update a room",
+                "Delete a room",
                 "Show all chores",
                 "Search for chore",
                 "Add a chore",
-                "Search for roommate",
-                "Show unassigned chores",
                 "Assign a chore",
-                "Update a room",
-                "Delete a room",
                 "Update a chore",
                 "Delete a chore",
+                "Show unassigned chores",
+                "Search for roommate",
                 "Exit"
             };
 

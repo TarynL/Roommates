@@ -198,7 +198,26 @@ namespace Roommates.Repositories
                 };
             }
 
+
         }
+
+        
+        public void DeleteAssignChores(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM RoommateChore WHERE choreId = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+
         /// <summary>
         ///  Update the chore with the given id
         /// </summary>
@@ -233,6 +252,7 @@ namespace Roommates.Repositories
                     cmd.CommandText = "DELETE FROM Chore WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
+
                 }
             }
         }
