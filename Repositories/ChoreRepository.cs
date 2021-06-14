@@ -306,5 +306,51 @@ namespace Roommates.Repositories
             }
 
         }
+        public List<Chore> AssignedChores()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT c.Name,  r.FirstName
+                         FROM Chore c 
+                        LEFT JOIN RoommateChore rc  on rc.ChoreId = c.Id
+                        LEFT JOIN Roommate r on r.Id = rc.RoommateId";
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Chore> assignedChore = new List<Chore>();
+
+                    while(reader.Read())
+                    {
+                        int IdColumnPosition = reader.GetOrdinal("Id");
+                        int idValue = reader.GetInt32(IdColumnPosition);
+
+
+                    }
+                }
+            }
+        }
+        public void ReassignChores (int chore, int roommate)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO RoommateChore (ChoreId, RoommateId) 
+                                         OUTPUT INSERTED.Id 
+                                         VALUES (@choreId, @roommateId)";
+                    cmd.Parameters.AddWithValue("@choreId", chore);
+                    cmd.Parameters.AddWithValue("@roommateId", roommate);
+
+                    int choreId = (int)cmd.ExecuteScalar();
+                    int roommateId = (int)cmd.ExecuteScalar();
+
+                    choreId = chore;
+                    roommateId = roommate;
+                };
+            }
+
     }
 }

@@ -254,8 +254,11 @@ namespace Roommates
                         Console.ReadKey();
                         break;
 
+                    case ("Reassign chore"):
 
-
+                        Console.Write("Press any key to continue");
+                        Console.ReadKey();
+                        break;
 
                     case ("Exit"):
                         runProgram = false;
@@ -281,6 +284,7 @@ namespace Roommates
                 "Search for chore",
                 "Add a chore",
                 "Assign a chore",
+                "Reassign chore",
                 "Update a chore",
                 "Delete a chore",
                 "Show unassigned chores",
